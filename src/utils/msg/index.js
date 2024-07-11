@@ -84,7 +84,7 @@ const msgFields = Object.freeze({
     TOKEN_ERROR: "登录信息已过期，请重新登录",
     LOGIN_SUCCESS: "登录成功",
     LOGOUT_SUCCESS: "退出登录成功",
-    NOT_PERMISSION: "无权限访问",
+    NOT_PERMISSION: "无访问权限",
     SYSTEM_ERROR: "系统错误",
     REQUEST_TIMEOUT: "请求超时，请稍后再试",
     ERR_NETWORK: "网络错误，请检查您的网络连接",

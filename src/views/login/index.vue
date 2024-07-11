@@ -8,8 +8,7 @@
                 <el-input v-model="user.password" placeholder="密码" type="password" show-password prefix-icon="Lock" />
             </el-form-item>
             <el-form-item style="margin-bottom: 0">
-                <el-button type="primary" style="width: 100%" @click="handleLogin" loading-icon="Watermelon"
-                    :loading="loginLoading">登
+                <el-button type="primary" style="width: 100%" @click="handleLogin" :loading="loginLoading">登
                     录</el-button>
             </el-form-item>
         </el-form>
@@ -45,7 +44,7 @@ const handleLogin = async () => {
             store.commit("setUserinfo", result.data.jwt)
             store.commit("setRightList", rights);
             // 动态生成路由，并添加到router中
-            createDynamicRoutes(rights);
+            createDynamicRoutes(router, rights);
             successMsg(msgFields.LOGIN_SUCCESS)
             router.push("/")
         }

@@ -33,8 +33,8 @@ instance.interceptors.response.use(
     response => {
         // 如果响应成功，但是响应的Result实体code为0，则提示错误信息
         if (response.data.code === 0) {
-            code0Map[response.data.msg] && code0Map[response.data.msg](); // 调用对应处理方法
-            alert(response.data.msg); // 提示错误信息
+            const msg = response.data.msg;
+            code0Map[msg] && code0Map[msg](); // 调用对应处理方法
         }
         return response; // 放行响应
     },

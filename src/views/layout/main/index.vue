@@ -11,7 +11,7 @@
 
 <style scoped>
 .el-main {
-  background-color: green;
+  /* background-color: green; */
   /* 计算主体部分高度，减去头部高度 */
   /* text-align: center; */
 }

@@ -2,11 +2,19 @@
   <el-header class="el-header">
     <!-- 图标部分 -->
     <div class="icon-container" @click="isCollapse = !isCollapse">
-      <el-icon size="25">
+      <el-icon size="30">
         <Fold v-if="!isCollapse" />
         <Expand v-if="isCollapse" />
       </el-icon>
     </div>
+    <el-breadcrumb class="breadcrumb" separator-icon="ArrowRight">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index"
+        :to="item.children && item.children.length > 0 ? { path: item.path } : ''">
+        {{ item.meta.title }}
+      </el-breadcrumb-item>
+    </el-breadcrumb>
+
     <div class="header-content">
       <!-- 头像部分 -->
       <div class="avatar-container">
@@ -18,9 +26,9 @@
           {{ userinfo.username }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
         </span>
         <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item icon="Setting">设置</el-dropdown-item>
-            <el-dropdown-item icon="SwitchButton" @click="outHandle">退出</el-dropdown-item>
+          <el-dropdown-menu class="custom-dropdown-menu">
+            <el-dropdown-item icon="Setting" class="dropdown-item">设置</el-dropdown-item>
+            <el-dropdown-item icon="SwitchButton" @click="outHandle" class="dropdown-item">退出</el-dropdown-item>
             <!-- 可以添加更多下拉菜单项 -->
           </el-dropdown-menu>
         </template>
@@ -45,6 +53,8 @@ const userinfo = computed(() => store.state.userinfo);
 
 const headImg = ref('https://lwn-management.oss-cn-hangzhou.aliyuncs.com/0410fb3c-3527-4b56-a36d-0ca5ec0c9c0a.jpeg');
 
+// router.currentRoute是响应式数据，用computed将其从路由中映射出来，得到的依然是一个响应式数据
+const breadcrumbs = computed(() => router.currentRoute.value.matched);
 
 // 退出登录
 const outHandle = () => {
@@ -53,8 +63,7 @@ const outHandle = () => {
   // 删除vuex中的用户信息
   store.state.userinfo = {};
   store.state.rightList = [];
-  removeDynamicRoutes(); // 删除动态路由
-  console.log(router.getRoutes());
+  removeDynamicRoutes(router); // 删除动态路由
   router.push("/login"); // 重定向到登录页面
 }
 </script>
@@ -66,17 +75,24 @@ const outHandle = () => {
   display: flex;
   align-items: center;
   padding: 0 20px;
-  /* 适当增加左右间距 */
 }
 
 .icon-container {
-  margin-right: auto;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.breadcrumb {
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .header-content {
   display: flex;
   align-items: center;
-  /* 使内容靠右对齐 */
 }
 
 .avatar-container {
@@ -87,9 +103,13 @@ const outHandle = () => {
   cursor: pointer;
 }
 
-/* 图标和用户名垂直对其 */
+/* 图标和用户名垂直对齐 */
 .el-dropdown-link {
   display: flex;
   align-items: center;
+}
+
+::v-deep .dropdown-item:hover {
+  background-color: green
 }
 </style>
