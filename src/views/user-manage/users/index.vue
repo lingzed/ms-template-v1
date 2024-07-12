@@ -41,4 +41,16 @@ onMounted(() => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.el-button {
+    background-color: #1f2d3d;
+    color: #ffd04b;
+    border-color: #1f2d3d;
+}
+
+.el-button:hover {
+    background-color: #5a697d;
+    color: #f9da83;
+    border-color: #5a697d;
+}
+</style>

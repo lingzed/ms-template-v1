@@ -2,7 +2,7 @@
   <el-header class="el-header">
     <!-- 图标部分 -->
     <div class="icon-container" @click="isCollapse = !isCollapse">
-      <el-icon size="30">
+      <el-icon size="30" style="color: #303133">
         <Fold v-if="!isCollapse" />
         <Expand v-if="isCollapse" />
       </el-icon>
@@ -27,8 +27,8 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu class="custom-dropdown-menu">
-            <el-dropdown-item icon="Setting" class="dropdown-item">设置</el-dropdown-item>
-            <el-dropdown-item icon="SwitchButton" @click="outHandle" class="dropdown-item">退出</el-dropdown-item>
+            <el-dropdown-item icon="Setting" class="_dropdown-item">设置</el-dropdown-item>
+            <el-dropdown-item icon="SwitchButton" @click="outHandle" class="_dropdown-item">退出</el-dropdown-item>
             <!-- 可以添加更多下拉菜单项 -->
           </el-dropdown-menu>
         </template>
@@ -77,6 +77,8 @@ const outHandle = () => {
 
 <style scoped>
 .el-header {
+  /* 向下的阴影 */
+  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.12);
   background-color: #b3c0d1;
   height: 60px;
   display: flex;
@@ -116,7 +118,17 @@ const outHandle = () => {
   align-items: center;
 }
 
-::v-deep .dropdown-item:hover {
-  background-color: green
+::v-deep .el-dropdown-menu__item._dropdown-item {
+  background-color: #fff !important;
+  /* 下拉菜单的字体颜色 */
+  color: #606266 !important;
+}
+
+::v-deep .el-dropdown-menu__item._dropdown-item:hover {
+  /* 下拉菜单悬停背景颜色 */
+  background-color: #1f2d3d !important;
+  /* 下拉菜单悬停字体颜色 */
+  color: #ffd04b !important;
+
 }
 </style>
