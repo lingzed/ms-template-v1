@@ -53,8 +53,15 @@ const userinfo = computed(() => store.state.userinfo);
 
 const headImg = ref('https://lwn-management.oss-cn-hangzhou.aliyuncs.com/0410fb3c-3527-4b56-a36d-0ca5ec0c9c0a.jpeg');
 
+const filterRoutes = ["index", "home"]
 // router.currentRoute是响应式数据，用computed将其从路由中映射出来，得到的依然是一个响应式数据
-const breadcrumbs = computed(() => router.currentRoute.value.matched);
+const breadcrumbs = computed(() => {
+  return router
+    .currentRoute
+    .value
+    .matched
+    .filter(item => !filterRoutes.includes(item.name));
+});
 
 // 退出登录
 const outHandle = () => {
